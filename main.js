@@ -23,7 +23,7 @@ var nums = [1, 1, 2, 3];
 function removeDuplicates(nums){
     for(var index = 0; index < nums.length ;index++){
         var temp = index;
-
+        
     }
 }
 
