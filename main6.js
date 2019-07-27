@@ -96,7 +96,7 @@ var maxScoreSightseeingPair = function(A) {
     //A[0] is current max
     var maxCheck = A[0];
     for(var index =1; index < A.length; ++index){
-        answer = Math.max(A[index] + maxCheck - index, maxCheck);
+        answer = Math.max(A[index] + maxCheck - index, answer);
         maxCheck = Math.max(A[index] + index, maxCheck);
     }
     return answer;
