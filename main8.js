@@ -45,10 +45,20 @@ var candy = function(ratings) {
         }
         //if index is not the beginning or end we check both sides
         if(index !== 0 && index !== end){
-            if((ratings[index] > ratings[index-1] || ratings[index] === ratings[index-1]) &&
-                (ratings[index] > ratings[index+1] || ratings[index] === ratings[index+1])){
-                    bonusCandy++;
-                }
+            //make placeholders for current, back, and forwards
+            var current = ratings[index];
+            var forward = ratings[index+1];
+            var backward = ratings[index-1];
+
+            if(current > backward && (current === forward || current < forward )){
+                bonusCandy++;
+            }
+            if(current > forward && (current === backward || current < backward )){
+                bonusCandy++;
+            }
+            if(current > forward && current > backward){
+                bonusCandy++;
+            }
         }
         answer = bonusCandy + baseCandyCount;
     }
