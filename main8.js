@@ -110,5 +110,34 @@ var minDistance = function(word1, word2) {
 */
 
 /*
+Find the duplicate number
+Given an array nums containing n+1 integers
+where each integer is between 1 and n inclusive
+prove that at least one duplicate number must exist
+assume that there is only one duplicate number
+find the duplicate one
 
+example:
+input: [1,4,3,2,2]
+output: is 2
+
+must not modify the array, assume read only
+you must use only constant O(1) extra spaces
+you run time should be less than O(n^2)
 */
+
+var findDuplicate = function(nums) {
+    //create a container to store each value
+    var container = {};
+    //loop and store values
+    for (var index = 0; index <nums.length; index++){
+    //check if container is already stored
+    var current = nums[index];
+    //check object own propert to see if value is already contained.
+    if(container.hasOwnProperty(current)){
+        return current;
+    }
+    container[current] = index; 
+    }
+};
+
