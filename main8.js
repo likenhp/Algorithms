@@ -66,3 +66,49 @@ var candy = function(ratings) {
 };
 
 candy([1,0,2]);
+
+//Alternative correct way
+
+var candy = function(ratings) {
+    var len = ratings.length;
+    var forward = new Array(len);
+    backward = new Array(len);
+
+    forward[0] = 1;
+    backward[len-1] = 1;
+    for (var i = 1; i < len; i++) {
+        if (ratings[i] > ratings[i-1]) forward[i] = forward[i-1] + 1;
+        else forward[i] = 1;
+    }
+
+    for (var i = len - 2; i >= 0; i--) {
+        if (ratings[i] > ratings[i+1]) backward[i] = backward[i+1] + 1;
+        else backward[i] = 1;
+    }
+    var sum = 0;
+    for (var i = 0; i < len; i++) {
+        sum += Math.max(forward[i], backward[i]);
+    }
+    return sum;
+};
+
+/*
+Given 2 words: word1 and word2, find the min number of operations
+to convert word1 to word2
+you have the following three operations permitted on the word
+1) insert character
+2) delete character
+3) replace a character
+
+example:
+word1: horse word2: ros
+output is three
+
+var minDistance = function(word1, word2) {
+    
+};
+*/
+
+/*
+
+*/
