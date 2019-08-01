@@ -141,3 +141,43 @@ var findDuplicate = function(nums) {
     }
 };
 
+/*
+Rotate List
+Given a linked list rotate the list to the right by k spaces
+where k is a non-negative
+
+example:
+input: [1,2,3,4,5,null], k = 2
+output: [4,5,1,2,3,null] 
+rotate one step to the 
+*/
+
+var rotateRight = function(head, k) {
+    //check if the list exists or if the list continues past one
+    if(!head || !head.next){
+        return head;
+    }
+    var dummy = head;
+    var length = 0;
+    //while loop to find the length of the linked list
+    while(dummy !== null){
+        dummy = dummy.next
+        length++
+    }
+    //modulus operator
+    
+    k = k % length
+    while(k > 0){
+        node = head;
+        while(node.next.next !== null){
+            node = node.next;
+        }
+        var temp = node.next;
+        node.next = null;
+        temp.next = head;
+        head = temp;
+        k--
+    }
+    return head;
+
+};
