@@ -164,7 +164,8 @@ var rotateRight = function(head, k) {
         dummy = dummy.next
         length++
     }
-    //modulus 
+    //modulus operator
+    
     k = k % length
     while(k > 0){
         node = head;
