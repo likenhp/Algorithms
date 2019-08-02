@@ -20,43 +20,43 @@ output: 4
 //if rating of current position is higher than one of the neighbors 
 //increase candy count
 
-var candy = function(ratings) {
+var candy = function (ratings) {
     //base candy count since all children must have at least one candy
     var baseCandyCount = ratings.length
     var bonusCandy = 0;
     var answer = 0;
     //create an array that loops through values
-    for(var index = 0; index < ratings.length; index++){
+    for (var index = 0; index < ratings.length; index++) {
         //end is placeholder for last child
-        var end = ratings.length-1;
+        var end = ratings.length - 1;
         //if at index 0 only check the value ahead of it
-        if(index === 0){
-            if(ratings[index] > ratings[index+1]){
+        if (index === 0) {
+            if (ratings[index] > ratings[index + 1]) {
                 //only if value is greater does child get more candy
                 bonusCandy++;
             }
         }
         //if index is at end make sure to check only value behind it
-        if(index === end){
-            if(ratings[index] > ratings[index-1]){
+        if (index === end) {
+            if (ratings[index] > ratings[index - 1]) {
                 //only if value is greater does child get more candy
                 bonusCandy++;
             }
         }
         //if index is not the beginning or end we check both sides
-        if(index !== 0 && index !== end){
+        if (index !== 0 && index !== end) {
             //make placeholders for current, back, and forwards
             var current = ratings[index];
-            var forward = ratings[index+1];
-            var backward = ratings[index-1];
+            var forward = ratings[index + 1];
+            var backward = ratings[index - 1];
 
-            if(current > backward && (current === forward || current < forward )){
+            if (current > backward && (current === forward || current < forward)) {
                 bonusCandy++;
             }
-            if(current > forward && (current === backward || current < backward )){
+            if (current > forward && (current === backward || current < backward)) {
                 bonusCandy++;
             }
-            if(current > forward && current > backward){
+            if (current > forward && current > backward) {
                 bonusCandy++;
             }
         }
@@ -65,24 +65,24 @@ var candy = function(ratings) {
     return answer;
 };
 
-candy([1,0,2]);
+candy([1, 0, 2]);
 
 //Alternative correct way
 
-var candy = function(ratings) {
+var candy = function (ratings) {
     var len = ratings.length;
     var forward = new Array(len);
     backward = new Array(len);
 
     forward[0] = 1;
-    backward[len-1] = 1;
+    backward[len - 1] = 1;
     for (var i = 1; i < len; i++) {
-        if (ratings[i] > ratings[i-1]) forward[i] = forward[i-1] + 1;
+        if (ratings[i] > ratings[i - 1]) forward[i] = forward[i - 1] + 1;
         else forward[i] = 1;
     }
 
     for (var i = len - 2; i >= 0; i--) {
-        if (ratings[i] > ratings[i+1]) backward[i] = backward[i+1] + 1;
+        if (ratings[i] > ratings[i + 1]) backward[i] = backward[i + 1] + 1;
         else backward[i] = 1;
     }
     var sum = 0;
@@ -126,18 +126,18 @@ you must use only constant O(1) extra spaces
 you run time should be less than O(n^2)
 */
 
-var findDuplicate = function(nums) {
+var findDuplicate = function (nums) {
     //create a container to store each value
     var container = {};
     //loop and store values
-    for (var index = 0; index <nums.length; index++){
-    //check if container is already stored
-    var current = nums[index];
-    //check object own propert to see if value is already contained.
-    if(container.hasOwnProperty(current)){
-        return current;
-    }
-    container[current] = index; 
+    for (var index = 0; index < nums.length; index++) {
+        //check if container is already stored
+        var current = nums[index];
+        //check object own propert to see if value is already contained.
+        if (container.hasOwnProperty(current)) {
+            return current;
+        }
+        container[current] = index;
     }
 };
 
@@ -152,24 +152,24 @@ output: [4,5,1,2,3,null]
 rotate one step to the 
 */
 
-var rotateRight = function(head, k) {
+var rotateRight = function (head, k) {
     //check if the list exists or if the list continues past one
-    if(!head || !head.next){
+    if (!head || !head.next) {
         return head;
     }
     var dummy = head;
     var length = 0;
     //while loop to find the length of the linked list
-    while(dummy !== null){
+    while (dummy !== null) {
         dummy = dummy.next
         length++
     }
     //modulus operator
-    
+
     k = k % length
-    while(k > 0){
+    while (k > 0) {
         node = head;
-        while(node.next.next !== null){
+        while (node.next.next !== null) {
             node = node.next;
         }
         var temp = node.next;
@@ -181,3 +181,65 @@ var rotateRight = function(head, k) {
     return head;
 
 };
+
+/*
+Longest Palindrome
+Given a string s, find the longest palindromic substring in s
+you may assume that the maximum length of s is 1000
+
+example:
+input: babad
+output: bab
+
+input: cbbd
+output: bb
+*/
+
+var longestPalindrome = function (s) {
+
+    // Manacher's Algorithm
+
+    // Justify if {string} s is totally palindrome string
+    var i
+        , len = Math.floor(s.length / 2) + 1
+        , isTotalPalindrome = true
+
+    for (i = 0; i < len; i++) {
+        if (s[i] != s[s.length - i - 1]) {
+            isTotalPalindrome = false
+            break;
+        }
+    }
+
+    if (isTotalPalindrome) return s;
+
+    // preprocess, make {string} s must contain a palindrome of odd length
+    s = [].join.call(s, '#')
+    s = '$#' + s + '#$'
+
+    var p = []
+        , C = 1
+        , R = 1
+        , iMirror
+        , max = 0
+        , maxIndex
+
+    for (i = 1; i < s.length - 1; i++) {
+        iMirror = 2 * C - i
+        p[i] = (R > i) ? Math.min(R - i, p[iMirror]) : 1
+
+        while (s[i - p[i]] == s[i + p[i]]) p[i]++
+
+        if (i + p[i] > R) {
+            R = i + p[i]
+            C = i
+        }
+
+        if (p[i] > max) {
+            max = p[i]
+            maxIndex = i
+        }
+    }
+
+    return s.substr(maxIndex - max + 1, 2 * max - 1).replace(/[$#]/g, '')
+}
