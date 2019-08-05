@@ -243,3 +243,20 @@ var longestPalindrome = function (s) {
 
     return s.substr(maxIndex - max + 1, 2 * max - 1).replace(/[$#]/g, '')
 }
+
+/*
+Array Nesting
+
+A zero indexed array A of length n contains all integers form 0 to n-1. 
+Find and return the longest length of set s
+where s[i] = {A[i], A[A[i]], A[A[A[i]]],...} subjected to the ruled below
+1)suppose the first element in s starts with the selection of A[i]
+of index = i
+2)The next element in s should A[A[i]]
+3)by that analogy we stop adding right before a duplicate element occurs in s
+
+example:
+input: A = [5,4,0,3,1,6,2]
+output: 4
+*/
+
