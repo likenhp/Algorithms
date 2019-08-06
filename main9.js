@@ -54,12 +54,12 @@ var isInterleaveHelper = function(s1, s2, s3, map) {
     return false;
 };
 
-/**
+
  * @param {string} s1
  * @param {string} s2
  * @param {string} s3
  * @return {boolean}
- */
+
 var isInterleave = function(s1, s2, s3) {
     var map = {};
     return isInterleaveHelper(s1, s2, s3, map);    
