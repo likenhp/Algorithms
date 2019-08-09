@@ -27,7 +27,7 @@ var maxProfit = function (prices) {
     //array that is a copy but contains nothing
     var empty = new Array(prices.length).fill(0);
     //create this for loop which accounts for two transactions
-    for (var temp = 0; temp < 2; temp++) {
+    for (var transactions = 0; transactions < 2; transactions++) {
         //min container
         var min = prices[0];
         //max container
@@ -42,3 +42,39 @@ var maxProfit = function (prices) {
 };
 
 maxProfit([3, 3, 5, 0, 0, 3, 1, 4]);
+
+/*
+Perfect Squares
+
+Given a positive integer N, find the least number of perfect square numbers
+(1,9,16,...) which sum to N
+
+example1:
+N = 13
+output: 2 (is 4 + 9)
+
+example2:
+N = 12
+output: 3 (is 4+4+4)
+*/
+
+var numSquares = function(n) {
+    //make a temp container for the answer
+    var container = [];
+
+    for(var index1 = 1; index1 <= n; index1++){
+        container[index1] = n;
+    }
+    //this loop will look for the squar numbers
+    for(var index2 = 1; (index2*index2) <= n; index2++){
+        container[index2*index2] = 1;
+    }
+    for (var index3=1; index3<=n; index3++){
+        for(var index4=1; index4*index4<n; index4++){
+            if(container[index3]>container[index3-index4*index4]+1 && index3>index4*index4){
+                container[index3]=container[index3-index4*index4]+1;
+            }
+        }
+    }
+    return container[n]
+};
