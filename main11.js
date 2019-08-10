@@ -65,7 +65,7 @@ var numSquares = function(n) {
     for(var index1 = 1; index1 <= n; index1++){
         container[index1] = n;
     }
-    //this loop will look for the squar numbers
+    //this loop will look for the square numbers
     for(var index2 = 1; (index2*index2) <= n; index2++){
         container[index2*index2] = 1;
     }
@@ -76,5 +76,41 @@ var numSquares = function(n) {
             }
         }
     }
-    return container[n]
+    return container[n];
+};
+
+/*
+Word Break
+given a non-empty string s and a dictionary called wordDict containing a list
+of non-empty words 
+determine if s can be segmented into a space seperated sequence
+of one or more dictionary words
+note:
+1) same word in dictionary may be used multiple times
+2) you may assume the dictionary does not contain duplicate words
+
+example:
+input: s = "leetcode", wordDict = ["leet", "code"]
+output: true
+
+input: s = "applepenapple", wordDict =["apple", "pen"]
+output: true
+
+input: s = "catsandog", wordDict = ["cats", "dog", "sand", "and", "cat"]
+output: false
+*/
+
+var wordBreak = function(s, wordDict) {
+    //make a loop using charAt to find value in the string for wordDict
+    //check it against the value of s
+    //if true remove it from the string s
+    //if no value is found then return from the loop and false
+
+    //first loop through wordDict
+    for(var dictIndex = 0; dictIndex < wordDict.length; dictIndex++){
+        var word = wordDict[dictIndex];
+        for(var wordIndex = 0; wordIndex < word.length; wordIndex++){
+            
+        }
+    }
 };
