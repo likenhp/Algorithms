@@ -106,11 +106,69 @@ var wordBreak = function(s, wordDict) {
     //if true remove it from the string s
     //if no value is found then return from the loop and false
 
+    var container = {};
+    
     //first loop through wordDict
-    for(var dictIndex = 0; dictIndex < wordDict.length; dictIndex++){
-        var word = wordDict[dictIndex];
-        for(var wordIndex = 0; wordIndex < word.length; wordIndex++){
-            
+    for(var index = 0; index < s.length; index++){
+        for(var index2 = 0; index2 < index; index2++){
+            var word = s.slice(index2, index+1);
+            if(wordDict.has(word) && (index2 === 0 || container[index2-1] === true)){
+                container[index] = true;
+            }
         }
     }
+    return container[s.length-1] || false
+};
+
+/*
+Convert a non negative integer to its english word's representation
+given input is guaranteed to be less than (2^31)-1
+
+
+
+example:
+input:[123]
+output:onehundredtwentythree
+
+input: [12345]
+input: twelvethousandthreehundredfortyfive
+
+*/
+
+//is in the millions since 2^31-1 is equal to 2147438647
+//focus on billion if length is greater than 
+//focus on hundred million if length is 9
+//focus on ten millions if length is 8
+//focus on millions if length is 7
+//focus on hundred thousand if length is 6
+//focus on ten thousands if length is 5
+//focus on thousands if length is 4
+//focus on hundreds if length is 3
+//focus on tens if length is 2
+//normal 0-9 number for if length is 1
+
+var numberToWords = function(num) {
+    //store the values of 1-20
+    var containerfirst20 = ["one", "two", "three", "four", "five", 
+    "six", "seven", "eight", "nine", "ten", 
+    "eleven", "twelve", "thirteen", "fourteen", "fifteen", 
+    "sixteen", "seventeen", "eighteen", "nineteen", "twenty"];
+    //store values by tens
+    var containerBy10 = ["twenty", "thirty", "fourty", "fifty", 
+    "sixty", "seventy", "eighty", "ninety", "hundred"];
+    //stores values by thousands, millions, so on
+    var containerByL = ["thousand", "million", "billion"];
+
+    //check the value
+    if(num < 0){
+        return "error"
+    }else if(num === 0){
+        return "zero"
+    }
+
+    //first find the length of num
+    var length = Math.ceil(Math.log10(num+1));
+
+
+
 };
