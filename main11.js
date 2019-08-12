@@ -172,3 +172,25 @@ var numberToWords = function(num) {
 
 
 };
+
+/*
+LRU cache
+
+design an implement a data structure for least recently used (LRU cache)
+it should support the following operations
+GET and PUT
+
+get(key)- get the value will always be positive of the key if the key exists in the cahce
+otherwise return negative 1
+put(key, value)- set or insert the value if the key is not already present
+when the cache reached its capacity, it should inalidate the least recent used item before inserting
+the newest item
+
+cache is initiated with a positive capacity
+
+followup: can you do both in O(1) time complexity?
+
+example:
+LRUcache cache= new LRUcache(2/*)
+
+*/
