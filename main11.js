@@ -58,21 +58,21 @@ N = 12
 output: 3 (is 4+4+4)
 */
 
-var numSquares = function(n) {
+var numSquares = function (n) {
     //make a temp container for the answer
     var container = [];
 
-    for(var index1 = 1; index1 <= n; index1++){
+    for (var index1 = 1; index1 <= n; index1++) {
         container[index1] = n;
     }
     //this loop will look for the square numbers
-    for(var index2 = 1; (index2*index2) <= n; index2++){
-        container[index2*index2] = 1;
+    for (var index2 = 1; (index2 * index2) <= n; index2++) {
+        container[index2 * index2] = 1;
     }
-    for (var index3=1; index3<=n; index3++){
-        for(var index4=1; index4*index4<n; index4++){
-            if(container[index3]>container[index3-index4*index4]+1 && index3>index4*index4){
-                container[index3]=container[index3-index4*index4]+1;
+    for (var index3 = 1; index3 <= n; index3++) {
+        for (var index4 = 1; index4 * index4 < n; index4++) {
+            if (container[index3] > container[index3 - index4 * index4] + 1 && index3 > index4 * index4) {
+                container[index3] = container[index3 - index4 * index4] + 1;
             }
         }
     }
@@ -100,24 +100,24 @@ input: s = "catsandog", wordDict = ["cats", "dog", "sand", "and", "cat"]
 output: false
 */
 
-var wordBreak = function(s, wordDict) {
+var wordBreak = function (s, wordDict) {
     //make a loop using charAt to find value in the string for wordDict
     //check it against the value of s
     //if true remove it from the string s
     //if no value is found then return from the loop and false
 
     var container = {};
-    
+
     //first loop through wordDict
-    for(var index = 0; index < s.length; index++){
-        for(var index2 = 0; index2 < index; index2++){
-            var word = s.slice(index2, index+1);
-            if(wordDict.has(word) && (index2 === 0 || container[index2-1] === true)){
+    for (var index = 0; index < s.length; index++) {
+        for (var index2 = 0; index2 < index; index2++) {
+            var word = s.slice(index2, index + 1);
+            if (wordDict.has(word) && (index2 === 0 || container[index2 - 1] === true)) {
                 container[index] = true;
             }
         }
     }
-    return container[s.length-1] || false
+    return container[s.length - 1] || false
 };
 
 /*
@@ -147,27 +147,27 @@ input: twelvethousandthreehundredfortyfive
 //focus on tens if length is 2
 //normal 0-9 number for if length is 1
 
-var numberToWords = function(num) {
+var numberToWords = function (num) {
     //store the values of 1-20
-    var containerfirst20 = ["one", "two", "three", "four", "five", 
-    "six", "seven", "eight", "nine", "ten", 
-    "eleven", "twelve", "thirteen", "fourteen", "fifteen", 
-    "sixteen", "seventeen", "eighteen", "nineteen", "twenty"];
+    var containerfirst20 = ["one", "two", "three", "four", "five",
+        "six", "seven", "eight", "nine", "ten",
+        "eleven", "twelve", "thirteen", "fourteen", "fifteen",
+        "sixteen", "seventeen", "eighteen", "nineteen", "twenty"];
     //store values by tens
-    var containerBy10 = ["twenty", "thirty", "fourty", "fifty", 
-    "sixty", "seventy", "eighty", "ninety", "hundred"];
+    var containerBy10 = ["twenty", "thirty", "fourty", "fifty",
+        "sixty", "seventy", "eighty", "ninety", "hundred"];
     //stores values by thousands, millions, so on
     var containerByL = ["thousand", "million", "billion"];
 
     //check the value
-    if(num < 0){
+    if (num < 0) {
         return "error"
-    }else if(num === 0){
+    } else if (num === 0) {
         return "zero"
     }
 
     //first find the length of num
-    var length = Math.ceil(Math.log10(num+1));
+    var length = Math.ceil(Math.log10(num + 1));
 
 
 
@@ -194,3 +194,66 @@ example:
 LRUcache cache= new LRUcache(2/*)
 
 */
+
+/*
+3sum
+
+Given an array nums of n integers, are there elements a,b,c in nums such that
+a+b+c = 0 ?
+find all unique triplets in the array that give the sum of zero
+note the solution set must not contain duplicate triplets
+
+example:
+nums = [-1, 0, 1, 2, -1, -4]
+solution: [[-1, 0, 1],[-1, -1, 2]]
+*/
+
+var threeSum = function (nums) {
+    //temp container
+    var answer = [];
+    var target = 0;
+    //sort the array to make it easier to detect
+    nums = nums.sort(function (a, b) {
+        return a - b;
+    })
+    if (nums.length < 3) {
+        return answer;
+    }
+    if (nums.length === 3 && (nums[0] + nums[1] + nums[2]) !== 0) {
+        return answer;
+    }
+    //left most value in loop
+    for (var left = 0; left < nums.length - 2; left++) {
+        if (nums[left] > target) {
+            break
+        }
+        //this will skip over duplicates
+        if (left > 0 && nums[left] === nums[left - 1]) {
+            continue
+        }
+        var middle = left + 1;
+        var right = nums.length - 1
+
+        while (middle < right) {
+            var sum = nums[left] + nums[middle] + nums[right];
+            if (sum === target) {
+                answer.push([nums[left], nums[middle], nums[right]]);
+                while (nums[middle] === nums[middle + 1]) {
+                    middle++;
+                }
+                while (nums[right] === nums[right - 1]) {
+                    right--;
+                }
+                middle++;
+                right--;
+            } else if (sum < target) {
+                middle++;
+            } else {
+                right--;
+            }
+        }
+    }
+    return answer;
+};
+
+    threeSum([-1, 0, 1, 2, -1, -4]);
