@@ -257,3 +257,29 @@ var threeSum = function (nums) {
 };
 
     threeSum([-1, 0, 1, 2, -1, -4]);
+
+/*
+Group Anagrams
+
+given an array of strings group anagrams together
+
+example:
+input: [eat,tea,tan,ate,nat,bat]
+output: [[ate,eat,tea],[nat,tan],[bat]];
+
+note: all inputs will be lowercase, order does not matter
+*/
+
+var groupAnagrams = function(strs) {
+    //make a container
+    var container = {};
+    for(var string of strs){
+        var temp = str.split("").sort().join("");
+        if(container[temp] === null){
+            container[temp] = [str];
+        }else{
+            container[temp].push(str)
+        }
+    }
+    return Object.values(container)
+};
