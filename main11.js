@@ -278,8 +278,37 @@ var groupAnagrams = function(strs) {
         if(container[temp] === null){
             container[temp] = [str];
         }else{
-            container[temp].push(str)
+            container[temp].push(str);
         }
     }
-    return Object.values(container)
+    return Object.values(container);
+};
+
+/*
+Number of Islands
+
+given a second grid map of '1's (land) and '0's (water), 
+count the number of islands
+and island is surround by water and formed by connecting adjacent lands
+horizontally or vertically
+you may assume all four edgeds of the grid are surrounded by water
+
+example: 
+input:
+[11110]
+[11010]
+[11000]
+[00000]
+output is 1
+
+input:
+[11000]
+[11000]
+[00100]
+[00011]
+output is 3
+
+*/
+var numIslands = function(grid) {
+    
 };
