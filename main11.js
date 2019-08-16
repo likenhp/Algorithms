@@ -312,3 +312,29 @@ output is 3
 var numIslands = function(grid) {
     
 };
+
+/*
+Maximum average subarray I
+
+Given an array consisting of n-integers
+find the contiguous subarray of given length k
+that has the maximum average value
+need to output the maximum average value
+
+input [1,12,-5,-6,50,3], k =4
+output = 12.75
+
+note: 1 <= k <= n <= 30,000
+*/
+
+var findMaxAverage = function(nums, k) {
+    var answer = -Infinity;
+    var sum = 0;
+    for(var index = 0; index < nums.length; index++){
+        sum += nums[index] - (nums[index-k] || 0);
+        if(index >= k - 1){
+            answer = Math.max(answer, sum)
+        }
+    }
+    return answer/k;
+};
