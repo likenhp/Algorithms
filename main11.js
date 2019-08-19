@@ -338,3 +338,61 @@ var findMaxAverage = function(nums, k) {
     }
     return answer/k;
 };
+
+/*
+Course Schedule
+
+There are a total of n courses you have to take,
+labeled from 0 to n-1
+some courses may have prerequisites, 
+for example: to take course 0 you need to take course 1
+which is expressed as a pair: [0,1]
+given the total number of courses and the list of prerequ pairs
+is it possible to finish all courses
+
+assume no prerequisite duplicates
+
+example:
+input: 2,[[1,0]]
+output: true
+
+input: 2,[[1,0],[0,1]]
+output: false
+*/
+
+/*
+Product of an array except self
+
+given an array nums of n-integers where n >1 ,
+return any array output such that output[i] is equal to product of 
+all the elements of num, excepts nums[i]
+
+example:
+input: [1,2,3,4]
+output: 24, 12, 8, 6
+
+note please solve without division and O(n)
+followup could you solve it with constant space complexity
+output array does not count as extra space for the purpose of space complexity analysis
+
+*/
+
+var productExceptSelf = function(nums) {
+    //make a container to store values
+    let answer = [];
+
+    let left = 1;
+    let right = 1;
+
+    for(let i = nums.length-1; i >=0; i--){
+        answer[i] = right;
+        right *= nums[i];
+    }
+    for(let j = 0; j < nums.length; j--){
+        answer[j] *= left;
+        left *= nums[j];
+    }
+    return answer;
+};
+
+productExceptSelf([1,2,3,4]);
