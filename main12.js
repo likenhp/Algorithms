@@ -47,3 +47,18 @@ var countDigitOne = function(n) {
 };
 
 countDigitOne(13);
+
+
+/*
+Practice
+Word Frequency
+
+write a bash script to calc frequency of each word in a text file
+words.txt
+for simplicity you may assume:
+words.txt contains only lowercase chars and space " " chars
+each word must consist of lower chars only
+words sep by one or more spaces
+
+
+ */
