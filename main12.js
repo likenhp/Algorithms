@@ -62,3 +62,50 @@ words sep by one or more spaces
 
 
  */
+
+/*
+
+Practice
+
+Ugly number ii
+write a program to find the n ugly number
+ugly numbers are positive numbers whose prime factors only include 2, 3, 5
+
+example:
+input: n = 10
+output: 12
+
+note:
+1 is typically treated as an ugly number
+n does not exceed 1690
+*/
+
+var nthUglyNumber = function(n) {
+    if (!n){
+        return 0;
+    }
+
+    var mult2 = 0;
+    var mult3 = 0;
+    var mult5 = 0;
+
+    var answer = [1];
+
+    while(!answer[n-1]){
+        var ugly2 = answer[mult2] * 2;
+        var ugly3 = answer[mult3] * 3;
+        var ugly5 = answer[mult5] * 5;
+
+        var findNext = Math.min((ugly2, ugly3), ugly5);
+        answer.push(findNext);
+        if(findNext === ugly2){
+            mult2++;
+        }else if(findNext === ugly3){
+            mult3++;
+        }else if (findNext === ugly5){
+            mult5++;
+        }
+
+    }
+    return answer[n-1];
+};
