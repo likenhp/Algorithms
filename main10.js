@@ -13,3 +13,22 @@ should run in O(n^2) complexity
 
 
 */
+
+
+var lengthOfLIS = function(nums) {
+    const container = [];
+    //in case nums has no values
+    if(nums.length === 0){
+        return 0;
+    }
+    for (let index1 = 0; index1 < nums.length; index1++){
+        container.push(1);
+        for(let index2 = 0; index2 < index1; index2++){
+            if(nums[index2] < nums[index1]){
+                container[index1] = Math.max(container[index1],container[index2]+1)
+            }
+        }
+    }
+    const answer = Math.max.apply(null,container);
+    return answer;
+};
