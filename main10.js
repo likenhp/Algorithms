@@ -32,3 +32,21 @@ var lengthOfLIS = function(nums) {
     const answer = Math.max.apply(null,container);
     return answer;
 };
+
+/*
+Remove invalid Parantheses
+
+Remove the minimum number of invalid parentheses in order to make the input string valid. 
+Return all possible results.
+
+example: "()())()"
+output: ["()()()", "(())()"]
+
+example: "(a)())()"
+output: ["(a)()()", "(a())()"]
+*/
+
+var removeInvalidParentheses = function(s) {
+    const answer = [];
+    
+};
