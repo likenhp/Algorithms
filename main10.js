@@ -50,3 +50,25 @@ var removeInvalidParentheses = function(s) {
     const answer = [];
     
 };
+
+/*
+Find Median from Data Stream
+
+Median is the middle value in an ordered integer list. 
+If the size of the list is even, there is no middle value. 
+So the median is the mean of the two middle value.
+*/
+
+var MedianFinder = function() {
+    
+};
+
+
+MedianFinder.prototype.addNum = function(num) {
+    
+};
+
+
+MedianFinder.prototype.findMedian = function() {
+    
+};
