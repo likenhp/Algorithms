@@ -20,11 +20,23 @@ your SQL query should return the following rows with the cancellation rate being
 /*
 
 Trips table is main table
-    Id (unique)
-    Client_Id (connected to "Users" table)
-    
-
-
+    id (unique)
+    client_Id (connected to "Users" table)
+    driver_Id (connected to "Drivers" table)
+    completed
+    cancelled_by_driver
+    cancelled_by_client
+*/
+/*
+User table is main table
+    id (unique)
+*/
+/*
+Drivers table is main table
+    id (unique)
+    client
+    driver
+    partner
 */
 
 
