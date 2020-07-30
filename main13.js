@@ -37,6 +37,9 @@ Drivers table is main table
     client
     driver
     partner
+
 */
+
+const query = `SELECT `
 
 
