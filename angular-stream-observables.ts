@@ -6,9 +6,9 @@
 const locations = new Observable((observer) => {
   let watchId: number;
 
-  // Simple geolocation API check provides values to publish
-  if ('geolocation' in navigator) {
-    watchId = navigator.geolocation.watchPosition((position: Position) => {
+  // Simple API check provides values to publish
+  if ('api' in apiData) {
+    watchId = apiData.api.watchPosition((position: Position) => {
       observer.next(position);
     }, (error: PositionError) => {
       observer.error(error);
@@ -20,7 +20,7 @@ const locations = new Observable((observer) => {
   // When the consumer unsubscribes, clean up data ready for next subscription.
   return {
     unsubscribe() {
-      navigator.geolocation.clearWatch(watchId);
+      apiData.geolocation.clearWatch(watchId);
     }
   };
 });
