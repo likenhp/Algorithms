@@ -11,7 +11,8 @@ var lengthOfLongestSubstring = function(s) {
 
     for (let index = 0; index < s.length; index++) {
         if (container[s[index]]) {
-            map = {};
+            // empty the container
+            container = {};
             start++;
             index = start;
         }
