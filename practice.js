@@ -9,15 +9,14 @@ var lengthOfLongestSubstring = function(s) {
   let max = 0 
   let container = {}
 
-    for (let index = 0; index < s.length; index++) {
-        if (container[s[index]]) {
-            // empty the container
-            container = {};
-            start++;
-            index = start;
-        }
-
-        container[s[index]] = true;
-        max = Math.max(max, index - start + 1);
+  for (let index = 0; index < s.length; index++) {
+    if (container[s[index]]) {
+      // empty the container
+      container = {};
+      start++;
+      index = start;
     }
+    container[s[index]] = true;
+    max = Math.max(max, index - start + 1);
+  }
 };
