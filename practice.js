@@ -39,27 +39,29 @@ N is a positive integer and will not exceed 15
 */
 
 var countArrangement = function(N) {
+  // let res = []
   let count = 0
+  function findArr(array,curr){
+    if(curr.length == N){
+      // res.push([...curr])
+      count++
+    }
+    if(!array.length){
+        return
+    }
+    for(let i=0;i<array.length;i++){
+      if(arrayay[i]%(curr.length+1)==0 || (curr.length+1)%array[i]==0){
+        curr.push(array[i])
+        findarray(array.filter(a=>a!=array[i]),curr)
+        curr.pop()
+        }
+    }
+  }
   let array = []
-  for(let i = 1; i <= N; i++){
+  for(let i=1;i<=N;i++){
     array[i]=i
   }
   findArr(array,[])
+  // console.log(res)
   return count
 };
-
-function findArr(array,curr){
-  if(curr.length === N){
-    count++
-  }
-  if(!array.length){
-      return
-  }
-  for(let i=0;i<array.length;i++){
-    if(arrayay[i]%(curr.length+1)==0 || (curr.length+1)%array[i]==0){
-      curr.push(array[i])
-      findarray(array.filter(a=>a!=array[i]),curr)
-      curr.pop()
-      }
-  }
-}
