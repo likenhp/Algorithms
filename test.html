@@ -230,7 +230,10 @@ $(document).ready(function(){
     if (!data.middleName) { // if middle name is non-existant value changed to Not Applicable
       data.middleName= 'N/A'
     }
-    // jQuery AJAX POST request
+    // jQuery AJAX POST request, will currently only console log success or error,
+    // for future implementation there should be callback functions that would inform user of completion
+    // in the case of an error it would tell user to resubmit and display the error (i.e. server failure)
+    // in case of success redirect to a new page to prevent further user interaction
     $.ajax({
 			url: "https://staging.sunwestbank.com/test_form/",
 			method: "post",
