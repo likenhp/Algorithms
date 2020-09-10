@@ -1,9 +1,268 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <script src="main5.js"></script>
-    </head>
-    <body>
-        
-    </body>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/additional-methods.min.js"></script>
+  <style>
+    .parent {
+      height: 100vh;
+      background-color: #F0F4F8;
+    }
+    .header {
+      height: 20%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    form .arrow.error {
+      color: #ff0000
+    }
+    .header img {
+      max-height: 100%;
+    }
+    .form-container {
+      background-color:white;
+      width: 80%;
+      padding: 1rem;
+      border-radius: 5px;
+    }
+    .container {
+      height: 80%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    input[type=text], input[type=number], input[type=email]   {
+      width: 100%;
+      padding: 5px 5px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    .submission {
+      color: white;
+      width: 20%;
+      margin: 8px 0;
+      padding: 7px 7px;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      background-color: #1D4A8C;
+    }
+    .submit{
+      display: flex;
+      justify-content: center;
+    }
+    .toggle-name {
+      margin: 0.7rem 0;
+    }
+  </style>
+</head>
+
+<body style="margin: 0">
+  <div class="parent">
+    <div class="header">
+      <img src="https://www.sunwestbank.com/wp-content/uploads/2020/07/sunwest-bbefe-logo-2x.png" alt="" srcset="">
+    </div>
+    <div class="container">
+      <div class="form-container">
+        <form>
+          <div class="two-name">
+            <div class="input">
+              <label for="firstName">First Name</label>
+              <input type="text" name="firstName" placeholder="John">
+            </div>
+            <div class="input">
+              <label for="middleName">Middle Name/Inital</label>
+              <input type="text" name="middleName" placeholder="Richard">
+            </div>
+            <div class="input">
+              <label for="lastName">Last Name</label>
+              <input type="text" name="lastName" placeholder="Doe">
+            </div>
+          </div>
+          <div class="full-name">
+            <div class="input">
+              <label for="fullName">Full Name</label>
+              <input type="text" name="fullName" placeholder="John Doe">
+            </div>
+          </div>
+          <button class="toggle-name">Toggle b/w Full Name or First/Last Name</button>
+          <div class="input">
+            <label for="email">Email</label>
+            <input type="email" name="email" placeholder="john.doe@email.com">
+          </div>
+          <div class="input">
+            <label for="address">Address</label>
+            <input type="text" name="address" placeholder="123 Main Street">
+          </div>
+          <div class="input">
+            <label for="phone">Phone Number</label>
+            <input type="text" name="phone" placeholder="123-456-7890">
+          </div>
+          <div class="input">
+            <label for="loan">Requested Loan Amount in $</label>
+            <input type="number" name="loan" placeholder="1000" min="0">
+          </div>
+          <div class="submit">
+            <button class="submission">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script>
+
+let toggleFlag = true;
+
+$(document).ready(function(){
+    // starts with full name hidden
+    $(".full-name").hide();
+});
+
+  function validateForm() {
+    jQuery.validator.addMethod("fullNameCheck", function(value) {
+      const words = value.trim().split(/\s+/)
+      // validator makes sure that name length is at least greater than one since user needs to enter at least their last and first names
+      // uses a switch case to allow easy access to more conditions down the line should there be more rules needed
+      switch (words.length) {
+        case 1:
+          return false
+          break;
+        default:
+          return true
+          break;
+      }
+      return false
+    })
+    // Initialize form validation
+    $("form").validate({
+      errorPlacement: function(label, element) {
+        label.addClass('arrow');
+        label.insertAfter(element);
+      },
+      // Specify validation rules
+      rules: {
+        // jquery validation plugin to reuqre all fields to be entered
+        firstName: 'required',
+        lastName: 'required',
+        fullName: {
+          required: true,
+          fullNameCheck: true
+        },
+        address: 'required',
+        loan: 'required',
+        phone: {
+          required: true,
+          phoneUS: true // uses jquery validation plugin to test if this si a valid US phone number
+        },
+        email: {
+          required: true,
+          email: true
+        },
+      },
+      // Specify validation error messages
+      messages: {
+        firstName: "Please enter your First Name",
+        lastName: "Please enter your Last Name",
+        fullName: "Please enter your Full Name",
+        address: "Please enter your address",
+        phone: "Please enter your phone number",
+        loan: "Please enter your requested loan amount",
+        email: "Please enter a valid email address"
+      }
+    });
+  };
+
+  $(".toggle-name").click(function(event) {
+    event.preventDefault()
+    if (!toggleFlag) {
+      $(".full-name").hide();
+      $(".two-name").show();
+      toggleFlag = true
+    } else {
+      $(".two-name").hide();
+      $(".full-name").show();
+      toggleFlag = false
+    }
+  })
+
+  $(".submission").click((event) => {
+    event.preventDefault()
+    validateForm()
+    if ($("form").valid()) { // check if form validation is all correct
+      let $data = $('form :input');
+      let result = {};
+
+      $data.each(function() {
+        this.name ? result[this.name] = $(this).val() : null
+      });
+      handleSubmit(result)
+    }
+  });
+
+  function handleSubmit(data) {
+    // checks to see if name is either in full or two name format
+    if (!toggleFlag) {
+      const words = data.fullName.trim().split(/\s+/)
+      if (words.length === 2) {
+        data.firstName = words[0]
+        data.lastName = words[1]
+      } else if (words.length > 2) {
+        data.firstName = words[0]
+        data.lastName = words[words.length-1]
+        words.shift()
+        words.pop()
+        data.middleName = words.join(' ')
+      }
+      delete data.fullName
+    } else {
+      delete data.fullName
+    }
+    data.loan = parseInt(data.loan) // ensures loan amount is an integer
+    if (!data.middleName) { // if middle name is non-existant value changed to Not Applicable
+      data.middleName= 'N/A'
+    }
+    // jQuery AJAX POST request, will currently only console log success or error,
+    // for future implementation there should be callback functions that would inform user of completion
+    // in the case of an error it would tell user to resubmit and display the error (i.e. server failure)
+    // in case of success redirect to a new page to prevent further user interaction
+    $.ajax({
+			url: "https://staging.sunwestbank.com/test_form/",
+			method: "post",
+			data: data,
+			dataType: "json",
+			success: successResponse,
+			error: console.log('error')
+		})
+  };
+
+  function successResponse(response) {
+		console.log(response)
+	}
+
+  </script>
+
+<!-- Optional Feature Notes
+
+Email and Phone Number Validation are done through the jQuery Validation plugin due to efficiency and reading conveniency
+otherwise it is possible to use regex expressions such as 
+phone: /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
+email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+The toggle function for first and full name uses a global flag to determine the user input and splits if it is in full name format
+A middle name input was added in to take into account people with longer full names (i.e John Richard Doe)
+
+
+
+-->
 </html>
+
+
+
