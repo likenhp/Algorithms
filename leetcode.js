@@ -31,3 +31,12 @@ var validMountainArray = function(A) {
 
   return direction === 0 ? true : false;
 };
+
+/**
+ * @param {number[]} days each int in array always from 1 to 365
+ * @param {number[]} costs
+ * @return {number}
+ */
+var mincostTickets = function(days, costs) {
+    
+};
