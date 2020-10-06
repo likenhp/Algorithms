@@ -36,7 +36,11 @@ var validMountainArray = function(A) {
  * @param {number[]} days each int in array always from 1 to 365
  * @param {number[]} costs
  * @return {number}
+ * 
+  Input: days = [1,4,6,7,8,20], costs = [2,7,15]
+  Output: 11
  */
 var mincostTickets = function(days, costs) {
     
 };
+
