@@ -41,6 +41,45 @@ var validMountainArray = function(A) {
   Output: 11
  */
 var mincostTickets = function(days, costs) {
-    
+  let minTotal = -1;
+
+  if (days && (days.length <= 365) && costs && (costs.length === 3)) {
+    let tempMin;
+    let memo = [];
+    let isTravelMarkers = [];
+
+    for (let i = 0; i < days.length; i++) {
+        isTravelMarkers[days[i]] = true;
+    }
+
+    memo[0] = 0;
+
+    for (let i = 1; i < isTravelMarkers.length; i++) {
+      if (!isTravelMarkers[i]) {
+        memo[i] = memo[i - 1];
+      } else {
+        tempMin = memo[i-1] + costs[0];
+        if (i - 7 >= 0) {
+          tempMin = Math.min(tempMin, (memo[i - 7] + costs[1]));
+        } else {
+          tempMin = Math.min(tempMin, costs[1]);
+        }
+
+        if (i - 30 >= 0) {
+          tempMin = Math.min(tempMin, (memo[i - 30] + costs[2]));
+        } else {
+          tempMin = Math.min(tempMin, costs[2]);
+        }
+
+        memo[i] = tempMin;
+
+      }
+    }
+
+    // the total minimal cost is the one of the last day in the memo[]
+    minTotal = memo[memo.length - 1];
+  }
+
+  return minTotal;
 };
 
