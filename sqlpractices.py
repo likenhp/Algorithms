@@ -50,3 +50,4 @@ inner_query = """
   INNER JOIN database.candidates AS c
   ON p.user_id = c.user_id
 """
+
