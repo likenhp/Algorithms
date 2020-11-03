@@ -93,3 +93,30 @@ var hIndex = function(citations) {
   return index; 
 };
 
+/**
+ * Single Number III
+ * @param {number[]} nums
+ * @return {number[]}
+ * 
+ * 
+ * Input: nums = [1,2,1,3,2,5]
+  Output: [3,5]
+  Explanation:  [5, 3] is also a valid answer.
+ */
+var singleNumber = function(nums) {
+  const container = {}
+  const result = []
+  nums.map( number => {
+    if (!container[number]) {
+      container[number] = true
+    } else {
+      container[number] = false
+    }
+  })
+  for (const property in container) {
+    if (container[property]) {
+      result.push(property)
+    }
+  }
+  return result
+};
