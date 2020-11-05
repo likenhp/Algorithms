@@ -163,14 +163,11 @@ var singleNumber2 = function(nums) {
  * @return {number}
  */
 var rob = function(root) {
-    if (!root) {
-      return 0
-    } else {
-      return recursive(root)[0]
-    }
+  return recursive(root)[0]
 };
 
 function recursive(root) {
+  if (!root) {return [0,0]}
   const left = recursive(root.left);
   const right = recursive(root.right);
   const currentMax = Math.max(left[0] + right[0], root.val + left[1] + right[1]);
