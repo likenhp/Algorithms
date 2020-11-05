@@ -103,7 +103,7 @@ var hIndex = function(citations) {
   Output: [3,5]
   Explanation:  [5, 3] is also a valid answer.
  */
-var singleNumber = function(nums) {
+var singleNumber3 = function(nums) {
   const container = {}
   const result = []
   nums.map( number => {
@@ -116,6 +116,33 @@ var singleNumber = function(nums) {
   for (const property in container) {
     if (container[property]) {
       result.push(property)
+    }
+  }
+  return result
+};
+
+/**
+ * Single Number III
+ * @param {number[]} nums
+ * @return {number}
+ * 
+ * Input: [2,2,3,2]
+ * Output: 3
+ * no find the non-dupe in the array
+ */
+var singleNumber2 = function(nums) {
+  const container = {}
+  let result = null
+  nums.map( number => {
+    if (!container[number]) {
+      container[number] = 1
+    } else {
+      container[number]++
+    }
+  })
+  for (const property in container) {
+    if (container[property] === 1) {
+      result = property
     }
   }
   return result
