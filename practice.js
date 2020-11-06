@@ -147,3 +147,30 @@ var singleNumber2 = function(nums) {
   }
   return result
 };
+
+/**
+ * House RObber III
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ * find the max sum of non directly linked nodes
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var rob = function(root) {
+  return recursive(root)[0]
+};
+
+function recursive(root) {
+  if (!root) {return [0,0]}
+  const left = recursive(root.left);
+  const right = recursive(root.right);
+  const currentMax = Math.max(left[0] + right[0], root.val + left[1] + right[1]);
+  const childrenMax = left[0] + right[0];                 
+  return [currentMax, childrenMax];
+}
