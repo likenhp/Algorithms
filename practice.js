@@ -184,22 +184,21 @@ function recursive(root) {
 var validPalindrome = function(s) {
   let start = 0;
   let end = s.length - 1;
+  let errors = 1; 
 
-  while (start < end) {
-    if (s[start] !== s[end]) {            
-      return isPalindrome(start+1, end, s) || isPalindrome(start, end-1, s)
-    }
-    start++, end--
-  }
-  return true
-};
-
-function isPalindrome(start, end, s) {
-  while (start < end) {
-    if (s[start] !== s[end]) {
+  while(start < end) {
+    if(s[start] === s[end]) {
+      start++;
+      end--;
+    } else if(s[start+1] === s[end] && s[start+2] === s[end-1] && errors) {
+      start++;
+      errors--;
+    } else if(s[start] === s[end-1] && errors){
+      end--;
+      errors--;
+    } else {
       return false
     }
-    start++, end--
   }
-  return true
-}
+  return true;
+};
