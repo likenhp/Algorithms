@@ -183,6 +183,23 @@ function recursive(root) {
  */
 var validPalindrome = function(s) {
   let start = 0;
-  let end = temp.length - 1;
+  let end = s.length - 1;
 
+  while (start < end) {
+    if (s[start] !== s[end]) {            
+      return isPalindrome(start+1, end, s) || isPalindrome(start, end-1, s)
+    }
+    start++, end--
+  }
+  return true
 };
+
+function isPalindrome(start, end, s) {
+  while (start < end) {
+    if (s[start] !== s[end]) {
+      return false
+    }
+    start++, end--
+  }
+  return true
+}
