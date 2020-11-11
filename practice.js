@@ -174,3 +174,31 @@ function recursive(root) {
   const childrenMax = left[0] + right[0];                 
   return [currentMax, childrenMax];
 }
+
+/**
+ * Valid Palindrome II
+ * @param {string} s
+ * @return {boolean}
+ * at most one character
+ */
+var validPalindrome = function(s) {
+  let start = 0;
+  let end = s.length - 1;
+  let errors = 1; 
+
+  while(start < end) {
+    if(s[start] === s[end]) {
+      start++;
+      end--;
+    } else if(s[start+1] === s[end] && s[start+2] === s[end-1] && errors) {
+      start++;
+      errors--;
+    } else if(s[start] === s[end-1] && errors){
+      end--;
+      errors--;
+    } else {
+      return false
+    }
+  }
+  return true;
+};
