@@ -181,9 +181,34 @@ function recursive(root) {
  * @return {boolean}
  * at most one character
  */
-var validPalindrome = function(s) {
-  let start = 0;
-  let end = s.length - 1;
-  // better to use recursion 
+var validPalindrome = function(s, skipped = false) {
+  for (let i = 0, j = str.length - 1; i < j; i++, j--) {
+    if (s[i] !== s[j]) {
+      if (skipped) return false;
+      return (
+        validPalindrome(s.substring(i, j), true) ||
+        validPalindrome(s.substring(i + 1, j + 1), true)
+      );
+    }
+  }
+  return true;
 
+};
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {number} x
+ * @param {number} y
+ * @return {boolean}
+ */
+var isCousins = function(root, x, y) {
+    
 };
