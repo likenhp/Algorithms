@@ -17,33 +17,34 @@ const sample = [
 [10,5,2,15,5]];
 
 const target = 720;
-const pyramidDescent = (list, output) => {
+const pyramidDescent = (array, output) => {
   let finalResult = ''
 
   // helper function uses recursion to find the movements that result in the final value
 
-  const pyramidDescentHelper = (array, target, end, result, currentPosition, currentRow, currentProduct, final) => {
+  const pyramidDescentHelper = (result, currentPosition, currentRow, currentProduct) => {
     let currentNumber;
-    if (currentRow !== end) {
+    if (currentRow !== array.length) {
       currentNumber =  array[currentRow][currentPosition];
       currentProduct = currentProduct * currentNumber
     }
     let movements = result
     
-    if (currentRow < end) {
+    if (currentRow < array.length) {
       if (currentProduct !== target) {
         let left = movements+'L'
         let right = movements+'R'
-        pyramidDescentHelper(array, target, end, left, currentPosition, currentRow+1, currentProduct, final) 
-        pyramidDescentHelper(array, target, end, right, currentPosition+1, currentRow+1, currentProduct, final)
+        pyramidDescentHelper(left, currentPosition, currentRow+1, currentProduct) 
+        pyramidDescentHelper(right, currentPosition+1, currentRow+1, currentProduct)
       } else {
         finalResult = result
       }
     }
   }
-  pyramidDescentHelper(list, output, list.length, '', 0, 0, 1, finalResult)
+  pyramidDescentHelper('', 0, 0, 1, finalResult)
   return finalResult
 }
 
 
 const results = pyramidDescent(sample, target)
+console.log(results)
