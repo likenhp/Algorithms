@@ -31,7 +31,7 @@ const pyramidDescent = (array, output) => {
     let movements = result
     
     if (currentRow < array.length) {
-      if (currentProduct !== target) {
+      if (currentProduct !== output) {
         let left = movements+'L'
         let right = movements+'R'
         pyramidDescentHelper(left, currentPosition, currentRow+1, currentProduct) 
