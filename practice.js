@@ -203,7 +203,7 @@ var validPalindrome = function(s, skipped = false) {
 var checkIfExist = function(array) {
   for (let index = 0; index < array.length; index++) {
     let double = arr[index] * 2
-    let check = index.indexOf(double)
+    let check = array.indexOf(double)
     if (check !== -1 && check !== index) {
       return true
     }
