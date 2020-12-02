@@ -197,31 +197,16 @@ var validPalindrome = function(s, skipped = false) {
 
 
 /**
- * Definition for a binary tree node.
- * function TreeNode(val, left, right) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.left = (left===undefined ? null : left)
- *     this.right = (right===undefined ? null : right)
- * }
- */
-/**
- * @param {TreeNode} root
- * @param {number} x
- * @param {number} y
+ * @param {number[]} arr
  * @return {boolean}
  */
-var isCousins = function(root, x, y) {
-  function getDepthAndParent(node, n, depth=0, parent){
-    if(!node) return null;
-    if(node.val === n) {
-        return {depth, parent};
+var checkIfExist = function(array) {
+  for (let index = 0; index < array.length; index++) {
+    let double = arr[index] * 2
+    let check = index.indexOf(double)
+    if (check !== -1 && check !== index) {
+      return true
     }
-    let left = getDepthAndParent(node.left, n, depth+1, node);
-    let right = getDepthAndParent(node.right, n, depth+1, node);
-    return left || right;
   }
-  let {depth: xDepth , parent: xParent } = getDepthAndParent(root,x);
-  let {depth: yDepth , parent: yParent } = getDepthAndParent(root,y);
-
-  return xDepth === yDepth && xParent !== yParent;
+return false;
 };
