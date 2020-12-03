@@ -199,14 +199,30 @@ var validPalindrome = function(s, skipped = false) {
 /**
  * @param {number[]} arr
  * @return {boolean}
+ * 2 <= arr.length <= 500
+ *-10^3 <= arr[i] <= 10^3
  */
 var checkIfExist = function(array) {
   for (let index = 0; index < array.length; index++) {
     let double = arr[index] * 2
     let check = array.indexOf(double)
-    if (check !== -1 && check !== index) {
+    if (check !== -1 && check !== index) { 
+      // have check !== index in the case the value is a 0 since an array with 2 zeros returns true
       return true
     }
   }
 return false;
+};
+
+/**
+ * @param {number[][]} accounts
+ * @return {number}
+ */
+var maximumWealth = function(accounts) {
+  let result = null;
+  accounts.map(customer => {
+    let wealth = customer.reduce((accumulator, value) => accumulator + value)
+    wealth > result ? result = wealth : null
+  })
+  return result
 };
