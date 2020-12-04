@@ -226,3 +226,22 @@ var maximumWealth = function(accounts) {
   })
   return result
 };
+
+/**
+ * @param {string} str
+ * @return {string}
+ */
+var toLowerCase = function(str) {
+  let result = '';
+  
+  for (let character = 0; character < str.length; character++) {
+    let asciiChar = str.charCodeAt(character);
+    if (asciiChar >= 65 && asciiChar <= 90) {
+      result += String.fromCharCode(asciiChar + 32)
+    } else {
+      result += str.charAt(character);
+    }
+  }
+  
+  return result;
+};
